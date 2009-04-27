@@ -1,0 +1,2 @@
+dsn: dbi:SQLite:../../MyModel/model.db
+kioku_dir: dbi:SQLite:foo.db
