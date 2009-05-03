@@ -4,6 +4,8 @@ use MyModel;
 use Moose;
 use MyAggregator::Entry;
 use KiokuDB;
+use Digest::SHA qw(sha256_hex);
+
 with 'MyAggregator::Roles::UserAgent', 'MyAggregator::Roles::Feed';
 
 has 'context' => ( is => 'ro', isa => 'HashRef' );
@@ -43,7 +45,7 @@ sub dedupe_feed {
     my $feed = $self->feed_parser( \$res->content );
     return if ( !$feed );
     foreach my $entry ( $feed->entries ) {
-        next if $self->schema->resultset( 'Entry' )->find( $entry->link );
+        next if $self->schema->resultset( 'Entry' )->find( sha256_hex $entry->link );
         my $meme = MyAggregator::Entry->new(
             permalink => $entry->link,
             title     => $entry->title,
