@@ -21,7 +21,7 @@ sub constructor : Tests(1) {
     can_ok $test->class, 'new';
 }
 
-sub fetch_feed : Tests(5) {
+sub fetch_feed : Tests(6) {
     my $test = shift;
     can_ok $test->class, 'fetch_feed';
 
@@ -33,6 +33,9 @@ sub fetch_feed : Tests(5) {
     # now data should be in cache
     my $ref = $obj->cache->get( $test->url );
     ok defined $ref, "... url is now in cache";
+
+    $res = $obj->fetch_feed( $test->url );
+    is $res->code,      "304",          "... already in cache";
 }
 
 sub feed_parser : Tests(3) {
