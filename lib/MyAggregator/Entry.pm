@@ -5,7 +5,7 @@ has 'author'  => ( is => 'rw', isa => 'Str' );
 has 'content' => ( is => 'rw', isa => 'Str' );
 has 'title'   => ( is => 'rw', isa => 'Str' );
 has 'id'      => ( is => 'rw', isa => 'Str' );
-has 'date'      => ( is => 'rw', isa => 'Str' );
+has 'date'      => ( is => 'rw', isa => 'Object' );
 has 'permalink' => (
     is       => 'rw',
     isa      => 'Str',
